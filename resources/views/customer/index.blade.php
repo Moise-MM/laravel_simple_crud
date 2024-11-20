@@ -3,7 +3,7 @@
     <h1 class="h3 mt-3">Customer list</h1>
     <hr>
     <div class="d-flex justify-content-end">
-        <a href="" class="btn btn-primary btn-sm">Add new customer</a>
+        <a href="{{ route('customer.create') }}" class="btn btn-primary btn-sm">Add new customer</a>
     </div>
     <hr>
     <table class="table">
