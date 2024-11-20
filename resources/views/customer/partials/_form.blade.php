@@ -11,4 +11,7 @@
     <div class="col-6">
         <x-input name="phone" label="Phone"  :value="$customer->phone ?? ''"/>
     </div>
+    <div class="col-12">
+        <x-input name="image" label="image" type="file"/>
+    </div>
 </div>

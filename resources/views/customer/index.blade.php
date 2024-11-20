@@ -10,6 +10,7 @@
         <thead>
           <tr>
             <th>#</th>
+            <th>Image</th>
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
@@ -20,11 +21,12 @@
           @foreach ($customers as $customer )
               <tr>
                 <td>{{ $loop->index + 1 }}</td>
+                <td><img src="{{ $customer->image ? asset('storage/' . $customer->image) : asset('assets/img/default.png') }}" width="50" height="50" class="img-thumbnail rounded-circle"></td>
                 <td>{{ $customer->first_name }} {{ $customer->last_name }}</td>
                 <td>{{ $customer->email }}</td>
                 <td>{{ $customer->phone }}</td>
                 <td class="d-flex">
-                    <a href="{{ route('customer.destroy', ['customer' => $customer]) }}" class="text-success me-2"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{{ route('customer.edit', ['customer' => $customer]) }}" class="text-success me-2"><i class="bi bi-pencil-square"></i></a>
                     <form action="{{ route('customer.destroy', ['customer' => $customer]) }}" method="POST"
                             onsubmit="confirm('Are you sure you want to delete this customer ?')">
                         @csrf

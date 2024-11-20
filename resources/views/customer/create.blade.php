@@ -7,7 +7,7 @@
 
             @include('shared._flash')
 
-            <form action="{{ route('customer.store') }}" method="POST">
+            <form action="{{ route('customer.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @include('customer.partials._form')
 

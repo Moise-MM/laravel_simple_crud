@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -50,8 +51,19 @@ class CustomerController extends Controller
             'first_name' => ['required'],
             'last_name' => ['required'],
             'phone' => ['required', 'min:8', 'max:18'],
-            'email' => ['required', 'email']
+            'email' => ['required', 'email'],
+            'image' => ['nullable','image', 'mimes:jpeg,png,jpg,gif','max:2048']
         ]);
+
+        // check for file
+        if ($request->hasFile('image')) {
+            // store the file and get path
+            $path = $request->file('image')->store('customers', 'public');
+
+            // add path to validated data
+            $validatedData['image'] = $path;
+        }
+
 
         Customer::create($validatedData);
 
@@ -93,6 +105,22 @@ class CustomerController extends Controller
             'phone' => ['required', 'min:8', 'max:18'],
             'email' => ['required', 'email']
         ]);
+        
+
+        // Check if a file was uploaded
+        if ($request->hasFile('image')) {
+            // Delete the old image from storage
+            if ($customer->image) {
+                Storage::disk('public')->delete($customer->image);
+            }
+            // Store the file and get the path
+            $path = $request->file('image')->store('customers', 'public');
+
+            // Add the path to the validated data array
+            $validatedData['image'] = $path;
+        }
+
+
 
         $customer->update($validatedData);
 
@@ -111,6 +139,12 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+
+        // If there is a image, delete it from storage
+        if ($customer->image) {
+            Storage::disk('public')->delete($customer->image);
+        }
+
         $customer->delete();
 
         return back()->with('success', 'Customer Deleted Successfully');

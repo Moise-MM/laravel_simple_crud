@@ -7,7 +7,7 @@
 
             @include('shared._flash')
 
-            <form action="{{ route('customer.update', ['customer' => $customer]) }}" method="POST">
+            <form action="{{ route('customer.update', ['customer' => $customer]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 @include('customer.partials._form')
