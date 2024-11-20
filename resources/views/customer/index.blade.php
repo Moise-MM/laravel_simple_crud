@@ -24,8 +24,11 @@
                 <td>{{ $customer->email }}</td>
                 <td>{{ $customer->phone }}</td>
                 <td class="d-flex">
-                    <a href="" class="text-success me-2"><i class="bi bi-pencil-square"></i></a>
-                    <form action="" >
+                    <a href="{{ route('customer.destroy', ['customer' => $customer]) }}" class="text-success me-2"><i class="bi bi-pencil-square"></i></a>
+                    <form action="{{ route('customer.destroy', ['customer' => $customer]) }}" method="POST"
+                            onsubmit="confirm('Are you sure you want to delete this customer ?')">
+                        @csrf
+                        @method("DELETE")
                         <button style="background-color:transparent" class=" border-0 shadow-none text-danger"><i class="bi bi-trash"></i></button>
                     </form>
                 </td>

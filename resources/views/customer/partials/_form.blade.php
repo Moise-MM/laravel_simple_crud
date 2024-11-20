@@ -1,14 +1,14 @@
 <div class="row">
     <div class="col-6">
-        <x-input name="first_name" label="Firstname"/>
+        <x-input name="first_name" label="Firstname" :value="$customer->first_name ?? ''"/>
     </div>
     <div class="col-6">
-        <x-input name="last_name" label="Lastname"/>
+        <x-input name="last_name" label="Lastname"  :value="$customer->last_name ?? ''"/>
     </div>
     <div class="col-6">
-        <x-input name="email" label="Email" type="email"/>
+        <x-input name="email" label="Email" type="email"  :value="$customer->email ?? ''"/>
     </div>
     <div class="col-6">
-        <x-input name="phone" label="Phone"/>
+        <x-input name="phone" label="Phone"  :value="$customer->phone ?? ''"/>
     </div>
 </div>
