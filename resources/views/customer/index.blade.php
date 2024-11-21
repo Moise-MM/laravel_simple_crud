@@ -38,5 +38,8 @@
           @endforeach
         </tbody>
       </table>
+      <div class="d-flex justify-content-end">
+        {{ $customers->links() }}
+      </div>
 
 </x-app-layout>
